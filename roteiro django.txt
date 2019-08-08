@@ -1,0 +1,164 @@
+# criar um projeto
+$ django-admin startproject learning_django
+------------------------------------------------------------------------------
+
+# criar app 
+$ python manage.py startapp video_games
+------------------------------------------------------------------------------
+
+# start server
+$ python manage.py runserver
+
+------------------------------------------------------------------------------
+
+# em video_games/views.py
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("")
+------------------------------------------------------------------------------
+
+# em video_games/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+------------------------------------------------------------------------------
+
+# em learning_django/urls.py
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('video_games/', include('video_games.urls')),
+    path('admin/', admin.site.urls),
+]
+------------------------------------------------------------------------------
+
+# em video_games/models.py
+from django.db import models
+import os
+
+class Console(models.Model):
+    name = models.CharField(max_length=200)
+    model = models.CharField(max_length=200)	
+    description = models.CharField(max_length=200)
+    image = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+
+class Comments(models.Model):
+    console = models.ForeignKey(Console, on_delete=models.CASCADE)
+    comment_txt = models.CharField(max_length=200)
+    score = models.IntegerField(default=0)
+    pub_date = models.DateTimeField('date published')
+    def __str__(self):
+        return self.comment_txt
+------------------------------------------------------------------------------
+
+#adicionar app em learning_django/settings.py
+INSTALLED_APPS = [
+    'video_games.apps.Video_gamesConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+DATABASE
+em settings ver como foi feito anteriormente
+
+Run python "manage.py makemigrations video_games" to create migrations for those changes
+Run python "manage.py migrate" to apply those changes to the database.
+
+------------------------------------------------------------------------------
+
+# para abrir o shell
+python manage.py shell
+
+from video_games.models import Console, Comments
+
+c = Console(name="Playstation2", model= "Sony",
+description= "Original PlayStation 2 with vertical stand",
+image= "caminho imagem playstation2")
+
+c.save()
+
+Console.objects.all()
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+# em video_games/views.py
+from django.shortcuts import render
+
+from .models import Question
+
+from django.shortcuts import render
+from .models import Question
+def index(request):
+    console_list = Console.objects.order_by('id')[:5]
+    context = {'console_list': console_list}
+    return render(request, 'video_games/index.html', context)
+
+------------------------------------------------------------------------------
+
+# criar video_games/templates/video_games/index.html
+<h1>Consoles</h1>
+{% if console_list %}
+    <ul>
+    {% for console in console_list %}
+        <li><a href="/video_games/{{ Console.id }}/">{{ Console.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No consoles are available.</p>
+{% endif %}
+
+------------------------------------------------------------------------------
+
+# em videogames/views.py
+from django.shortcuts import get_object_or_404, render
+from .models import Console
+
+def detail(request, console_id):
+    console = get_object_or_404(Console, pk=console_id)
+    comment_list = console.comments_set.objects.order_by('-pub_date')[:5]
+    return render(request, 'video_games/detail.html', {'console': console})
+
+
+
+------------------------------------------------------------------------------
+
+# criar video_games/templates/video_games/detail.html
+
+<head>
+<title>Console</title>
+</head>
+<body>
+<h1>{{ Console.name }}</h1>
+<img src={{ Console.image }} alt={{ Console.name }} style="width:128px;height:128px;">
+<p>{{ Console.description }}</p>
+
+{% if comment_list %}
+    <ul>
+    {% for comment in comment_list %}
+         <li>Score: {{ comment.score }}<br>{{ comment.comment_txt }}<br>{{ comment.pub_date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments are available.</p>
+{% endif %}
+
+</body>
