@@ -1,0 +1,12 @@
+<body>
+<h1>Consoles</h1>
+{% if console_list %}
+    <ul>
+    {% for console in console_list %}
+        <li><a href="/video_games/{{ console.id }}/">{{ console.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No consoles are available.</p>
+{% endif %}
+</body>

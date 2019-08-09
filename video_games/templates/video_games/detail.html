@@ -1,0 +1,20 @@
+<head>
+<title>Console</title>
+</head>
+<body>
+<h1>{{ console.name }}</h1>
+{% load static %} 
+<img src= {% static console.image %} alt={{ console.name }} style="height:500px;">
+<p>{{ console.description }}</p>
+
+{% if comment_list %}
+    <ul>
+    {% for comment in comment_list %}
+         <li>Score: {{ comment.score }}<br>{{ comment.comment_txt }}<br>{{ comment.pub_date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments are available.</p>
+{% endif %}
+
+</body>
