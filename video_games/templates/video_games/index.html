@@ -1,12 +1,7 @@
-<body>
-<h1>Consoles</h1>
-{% if console_list %}
-    <ul>
-    {% for console in console_list %}
-        <li><a href="/video_games/{{ console.id }}/">{{ console.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No consoles are available.</p>
-{% endif %}
-</body>
+{% extends 'video_games/base.html' %}
+{% load static %} 
+{% block content %}
+    <h1 style="font-size:60px;">HOME</h1>
+    <p> Site desenvolvido por Jão.<br><br></p>
+        <img src="{% static 'images/laranjo.png' %}" alt="larnjo" height="55%" class="center">
+{% endblock %}

@@ -1,0 +1,22 @@
+<head>
+    <link rel="stylesheet" href="navigation.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+        
+<body style="margin: 0;">
+    <div style="background-color: black">
+        <img src="gg.png" alt="gg" height="70%" class="center">
+        <nav>
+        {% if console_list %}
+            <ul>
+            <li><a href="#home"><i class="fas fa-home" style="font-size:20px;"></i></a></li>
+            {% for console in console_list %}
+                <li><a href="/video_games/{{ console.id }}/">{{ console.name }}</a></li>
+            {% endfor %}
+        {% else %}
+            <p>No consoles are available.</p>
+        {% endif %}
+            </ul>
+        </nav>
+    </div>
+</body>>
