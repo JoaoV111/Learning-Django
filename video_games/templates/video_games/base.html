@@ -1,0 +1,60 @@
+{% load static %} 
+<html>
+<head>
+    <title>Site Games</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        body {
+                margin: 0;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgba(190, 29, 29, 0.40) !important;
+                background-image: url("{% static 'images/vd2_bk.jpg' %}");
+                background-blend-mode: color;
+             }
+             * {
+                box-sizing: border-box;
+               }
+    </style>
+</head>
+
+<header style="margin: 0;">
+        
+    <div style="background-color: black">
+        <img src="{% static 'images/gg.png' %}" alt="gg" height="20%" class="center">
+        <nav>
+            {% if console_list %}
+            <ul class="ul_header">
+                <li><a href="/video_games/"><i class="fas fa-home" style="font-size:20px;"></i></a></li>
+                {% for console in console_list %}
+                    <li><a href="/video_games/{{ console.id }}/">{{ console.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                <p>No consoles are available.</p>
+            {% endif %}
+            </ul>
+        </nav>
+    </div>
+           
+</header>
+
+<body>
+    <section>
+        <article class="center">
+            <div class="center white_box" >
+                {% block content %}
+                {% endblock %}
+            </div>
+        </article>
+    </section>
+
+    <footer>
+        <p style="text-align: center">A site made by Jão</p>
+    </footer>
+
+</body>
+
+

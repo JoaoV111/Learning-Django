@@ -1,20 +1,25 @@
-<head>
-<title>Console</title>
-</head>
-<body>
-<h1>{{ console.name }}</h1>
+{% extends 'video_games/base.html' %}
 {% load static %} 
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/submit_button.css' %}">
+<h1 style="font-size:60px;">{{ console.name }}</h1>
 <img src= {% static console.image %} alt={{ console.name }} style="height:500px;">
-<p>{{ console.description }}</p>
-
+<p style="text-align: left;">{{ console.description }}<br><br></p>
+<form action="/video_games/{{ console.id }}/comment_detail" method="get">
+    <input type="submit"  value="Fazer um comentário" class="button button1"/>
+</form>
 {% if comment_list %}
     <ul>
     {% for comment in comment_list %}
-         <li>Score: {{ comment.score }}<br>{{ comment.comment_txt }}<br>{{ comment.pub_date }}</li>
+    <div class="grey_box center">
+        <p style="text-align: left;">Nota: {{ comment.score }}</p>
+        <p class="comment" style="text-align: left;">{{ comment.comment_txt }}</p>
+        <p style="text-align: right;color:gray;">{{ comment.pub_date }}</p>
+    </div>
     {% endfor %}
     </ul>
 {% else %}
     <p>No comments are available.</p>
 {% endif %}
 
-</body>
+{% endblock %}
