@@ -23,8 +23,9 @@
 
 <header style="margin: 0;">
         
-    <div style="background-color: black">
-        <img src="{% static 'images/gg.png' %}" alt="gg" height="20%" class="center">
+    <div style="background-image: url('{% static 'images/wood2.jpg' %}');
+                background-size: 100%;">
+        <img src="{% static 'images/gg_b.png' %}" alt="gg" height="29%" class="center">
         <nav>
             {% if console_list %}
             <ul class="ul_header">
@@ -44,7 +45,7 @@
 <body>
     <section>
         <article class="center">
-            <div class="center white_box" >
+            <div class="center white_box" style="background-image: url('{% static 'images/dust.png' %}');">
                 {% block content %}
                 {% endblock %}
             </div>

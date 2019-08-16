@@ -8,10 +8,9 @@
   margin: 20px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
   border-radius: 5px;
-	max-width:80%;
+	max-width:90%;
 }
 .white_box {
-  background-color: white;
   padding: 0.01em 29px;
   margin: 5px 0;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;

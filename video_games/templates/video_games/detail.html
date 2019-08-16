@@ -9,7 +9,7 @@
     <input type="submit"  value="Fazer um comentário" class="button button1"/>
 </form>
 {% if comment_list %}
-    <ul>
+    <ul style="margin: 0; padding: 0;">
     {% for comment in comment_list %}
     <div class="grey_box center">
         <p style="text-align: left;">Nota: {{ comment.score }}</p>
