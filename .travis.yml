@@ -1,0 +1,26 @@
+# Linguagem Utilizada para Desenvolver a Aplicação
+language: python
+
+# Versão que a aplicação suporta.
+python:
+  - "3.6.8"
+
+# Faz a instalação com Sudo, para ter privilégio de Super Usuário.
+sudo: required
+
+# Instalação de Módulos que são necessários para a Aplicação.
+install:
+  - pip3 install django
+  - pip3 install django-utils
+  - pip3 install django-crispy-forms
+
+# Defini o script de Teste que deve rodar toda vez que o código for alterado.
+script:
+  - python test.py
+
+# Defini que o processo de Deploy será na Plataforma Heroku. É necessário informar o nome da APP criada no Heroku
+deploy:
+  provider: heroku
+  api-key: cfae247c-7c2d-49f0-b23e-847502ca52b2
+    secure: $HEROKU_SITEJAO
+  app: sitejao
