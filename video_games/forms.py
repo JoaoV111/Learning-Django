@@ -16,10 +16,10 @@ from crispy_forms.layout import Submit, Layout
 
 class CommentsForm(forms.Form):
 	score = forms.ChoiceField(required=False, choices=[(0, '0'), (1, '1'),
-										(2, '2'), (3, '3'),
-										(4, '4'), (5, '5')], label='Nota')
-	comment_txt = forms.CharField(widget=forms.Textarea(
-								  attrs={'cols': 80, 'rows': 20}), label='Comentário')
+							   (2, '2'), (3, '3'),
+							   (4, '4'), (5, '5')], label='Nota')
+	comment_txt = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+				      			    label='Comentário')
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -27,8 +27,8 @@ class CommentsForm(forms.Form):
 		self.helper = FormHelper
 		self.helper.form_method = 'post'
 		self.helper.layout = Layout(
-			'score',
-			'comment_txt',
-			Submit('submit', 'Submit', css_class='button white')
-			)
+					    'score',
+					    'comment_txt',
+					    Submit('submit', 'Submit', css_class='button white')
+					    )
 
